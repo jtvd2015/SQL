@@ -7,6 +7,7 @@ insert into Category (Description)
 	values ('Personal')
 insert into Category (Description)
 	values ('Work')
+drop table if exists ToDo
 CREATE TABLE ToDo (
 	Id int primary key identity(1,1),
 	Task nvarchar(80) not null, 
@@ -14,7 +15,7 @@ CREATE TABLE ToDo (
 		check (Priority > 0 and Priority < 10),
 	Completed bit not null default 0,
 	DueDate datetime,
-	
+	CategoryId int foreign key references Category(Id)
 )
 go
 insert into [ToDo] (Task, DueDate, Priority)
