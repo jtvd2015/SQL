@@ -25,3 +25,10 @@ CREATE TABLE Employee (
     Manager nvarchar(288) not null,
     ManagerId int foreign key references Manager(Id)
 )
+go
+insert into Department (Name, CostCenter)
+    values ('IT', 100000)
+insert into Manager (FirstName, LastName, Department)
+    values ('T', 'Sorenson', 'IT')
+insert into Employee (FirstName, LastName, Birthday, Job, Manager)
+    values ('Lisa', 'Sagaittus', 1990-04-14, 'IT', 'T Sorenson')
