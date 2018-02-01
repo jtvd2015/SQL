@@ -23,7 +23,7 @@ CREATE TABLE Employee (
     Birthday datetime not null,
     Job nvarchar(288),
     Manager nvarchar(288) not null,
-    ManagerId int foreign key references Manager(Id)
+    ManagerId int not null foreign key references Manager(Id)
 )
 go
 insert into Department (Name, CostCenter)
