@@ -20,8 +20,8 @@ CREATE TABLE Employee (
     Id int primary key identity(1,1),
     FirstName varchar(288) not null,
     LastName varchar(288) not null,
-    Birthday int,
-    Job nvarchar(288) not null,
+    Birthday datetime not null,
+    Job nvarchar(288),
     Manager nvarchar(288) not null,
     ManagerId int foreign key references Manager(Id)
 )
