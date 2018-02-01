@@ -1,3 +1,12 @@
+CREATE TABLE Cateory (
+	Id int primary key identity (1,1),
+	Description nvarchar(30) not NULL
+)
+go
+insert into Category (Description) 
+	values ('Personal')
+insert into Category (Description)
+	values ('Work')
 CREATE TABLE ToDo (
 	Id int primary key identity(1,1),
 	Task nvarchar(80) not null, 
