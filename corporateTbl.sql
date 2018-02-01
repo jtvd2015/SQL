@@ -30,5 +30,10 @@ insert into Department (Name, CostCenter)
     values ('IT', 100000)
 insert into Manager (FirstName, LastName, Department)
     values ('T', 'Sorenson', 'IT')
+<<<<<<< HEAD
 insert into Employee (FirstName, LastName, Birthday, Job, Manager, ManagerId)
     values ('Lisa', 'Sagaittus', 1990-04-14, 'IT', 'T Sorenson', 01)
+=======
+insert into Employee (FirstName, LastName, Birthday, Job, Manager)
+    values ('Lisa', 'Sagaittus', 1990-04-14, 'IT', 'T Sorenson')
+>>>>>>> 9ed502e58354a1dee372a70d34955437415849e5
