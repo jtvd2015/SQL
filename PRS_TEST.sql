@@ -1,4 +1,6 @@
-create database PRS_TEST
+drop database if exists PRS_TEST;
+go
+create database PRS_TEST;
 go
 use PRS_TEST
 drop table if exists [PurchaseRequestLineItems]
@@ -7,33 +9,17 @@ drop table if exists [Product]
 drop table if exists [Vendor]
 drop table if exists [User]
 go
-CREATE TABLE [PurchaseRequestLineItems] (
-	Id int not null primary key identity(1,1),
-	PurchaseRequestId int not null references [PurchaseRequest](Id),
-    ProductId int not null references [Product](Id),
-    Quantity int not null default 1
-)
-go
-CREATE TABLE [PurchaseRequest] (
+CREATE TABLE [User] (
     Id int not null primary key identity(1,1),
-    Description nvarchar(80) not null,
-    Justification nvarchar(255),
-    DateNeeded date not null default dateadd(day, +7, getdate()),
-    DeliveryMode nvarchar(25),
-    Status nvarchar(10) not null default 'NEW',
-    Total money not null default 0.0,
-    UserId int not null default System_user references [User](Id),
-)
-go
-CREATE TABLE [Product] (
-    Id int not null primary key identity(1,1), 
-    Name nvarchar(130) not null,
-    VendorPartNumber nvarchar(50) not null,
-    Price money not null,
-    Unit nvarchar(10) not null,
-    PhotoPath nvarchar(255),
-    VendorId int not null references Vendor(Id),
-    Active bit not null default 1,
+    UserName nvarchar(30) not null,
+    Password nvarchar(30) not null,
+    FirstName nvarchar(30) not null,
+    LastName nvarchar(30) not null,
+    Phone nvarchar(12),
+    Email nvarchar(80),
+    IsReviewer bit not null default 0,
+    IsAdmin bit not null default 0,
+    Active bit not null default 1
 )
 go
 CREATE TABLE [Vendor] (
@@ -51,17 +37,33 @@ CREATE TABLE [Vendor] (
     Active bit not null default 1
 )
 go
-CREATE TABLE [User] (
+CREATE TABLE [Product] (
+    Id int not null primary key identity(1,1), 
+    Name nvarchar(130) not null,
+    VendorPartNumber nvarchar(50) not null,
+    Price money not null,
+    Unit nvarchar(10) not null,
+    PhotoPath nvarchar(255),
+    VendorId int not null references Vendor(Id),
+    Active bit not null default 1,
+)
+go
+CREATE TABLE [PurchaseRequest] (
     Id int not null primary key identity(1,1),
-    UserName nvarchar(30) not null,
-    Password nvarchar(30) not null,
-    FirstName nvarchar(30) not null,
-    LastName nvarchar(30) not null,
-    Phone nvarchar(12),
-    Email nvarchar(80),
-    IsReviewer bit not null default 0,
-    IsAdmin bit not null default 0,
-    Active bit not null default 1
+    Description nvarchar(80) not null,
+    Justification nvarchar(255),
+    DateNeeded date not null default dateadd(day, +7, getdate()),
+    DeliveryMode nvarchar(25),
+    Status nvarchar(10) not null default 'NEW',
+    Total money not null default 0.0,
+    UserId int not null default System_user references [User](Id),
+)
+go
+CREATE TABLE [PurchaseRequestLineItems] (
+	Id int not null primary key identity(1,1),
+	PurchaseRequestId int not null references [PurchaseRequest](Id),
+    ProductId int not null references [Product](Id),
+    Quantity int not null default 1
 )
 go
 INSERT INTO [User] (UserName, Password, FirstName, LastName, Phone, Email, IsReviewer, IsAdmin)
@@ -74,3 +76,5 @@ INSERT INTO [Vendor] (Code, Name, Address, City, State, Zip, Phone, Email, IsRec
 INSERT INTO [Vendor] (Code, Name, Address, City, State, Zip, Phone, Email, IsRecommended, Active)
     values (2, 'Markham Winery', '1324 Church St', 'Piner', 'KY', 41063, '', '', '', '')
 go
+INSERT INTO [Product] (Name, VendorPartNumber, Price, Unit, PhotoPath, VendorId, Active)
+    values ('Tanstafl', 001, 300, 1, '', 1, '')
