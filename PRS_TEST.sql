@@ -2,7 +2,6 @@ drop database if exists PRS_TEST;
 go
 create database PRS_TEST;
 go
-use PRS_TEST
 drop table if exists [PurchaseRequestLineItems]
 drop table if exists [PurchaseRequest]
 drop table if exists [Product]
@@ -78,3 +77,9 @@ INSERT INTO [Vendor] (Code, Name, Address, City, State, Zip, Phone, Email, IsRec
 go
 INSERT INTO [Product] (Name, VendorPartNumber, Price, Unit, PhotoPath, VendorId, Active)
     values ('Tanstafl', 001, 300, 1, '', 1, '')
+go
+INSERT INTO [PurchaseRequest] (Description, Justification, DateNeeded, DeliveryMode, Status, Total, UserId)
+    values ('Wine', 'Just because I needed it', '', 'USPS', '', 1, '')
+go
+INSERT INTO [PurchaseRequestLineItems] (PurchaseRequestId, ProductId, Quantity)
+    values ('', '', '')
