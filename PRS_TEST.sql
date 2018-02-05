@@ -2,6 +2,7 @@ drop database if exists PRS_TEST;
 go
 create database PRS_TEST;
 go
+use PRS_TEST;
 drop table if exists [PurchaseRequestLineItems]
 drop table if exists [PurchaseRequest]
 drop table if exists [Product]
@@ -55,7 +56,7 @@ CREATE TABLE [PurchaseRequest] (
     DeliveryMode nvarchar(25),
     Status nvarchar(10) not null default 'NEW',
     Total money not null default 0.0,
-    UserId int not null default System_user references [User](Id),
+    UserId int not null default Current_user references [User](Id),
 )
 go
 CREATE TABLE [PurchaseRequestLineItems] (
@@ -78,8 +79,8 @@ go
 INSERT INTO [Product] (Name, VendorPartNumber, Price, Unit, PhotoPath, VendorId, Active)
     values ('Tanstafl', 001, 300, 1, '', 1, '')
 go
-INSERT INTO [PurchaseRequest] (Description, Justification, DateNeeded, DeliveryMode, Status, Total, UserId)
-    values ('Wine', 'Just because I needed it', '', 'USPS', '', 1, '')
+INSERT INTO [PurchaseRequest] (Description, Justification, DateNeeded, DeliveryMode, Status, Total)
+    values ('Wine','Just because I needed it','', 'USPS','', 1)
 go
 INSERT INTO [PurchaseRequestLineItems] (PurchaseRequestId, ProductId, Quantity)
     values ('', '', '')
