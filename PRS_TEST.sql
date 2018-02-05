@@ -56,7 +56,7 @@ CREATE TABLE [PurchaseRequest] (
     DeliveryMode nvarchar(25),
     Status nvarchar(10) not null default 'NEW',
     Total money not null default 0.0,
-    UserId int not null default Current_user references [User](Id),
+    UserId int not null default Current_user references [User](Id)
 )
 go
 CREATE TABLE [PurchaseRequestLineItems] (
@@ -70,17 +70,22 @@ INSERT INTO [User] (UserName, Password, FirstName, LastName, Phone, Email, IsRev
     values ('jtvd2015', 'b@ByD0lL.#7', 'Jennifer', 'Wesselman', '', '', '', '')
 INSERT INTO [User] (UserName, Password, FirstName, LastName, Phone, Email, IsReviewer, IsAdmin)
     values ('tyler', 'm@b3l', 'Todd', 'Ross', '', '', '', '')
+select * from [User]
 go
 INSERT INTO [Vendor] (Code, Name, Address, City, State, Zip, Phone, Email, IsRecommended, Active)
     values (1, 'Tanten''s Brewery', '1201 Demia Way', 'Florence', 'KY', 41041, '', '', '', '')
 INSERT INTO [Vendor] (Code, Name, Address, City, State, Zip, Phone, Email, IsRecommended, Active)
     values (2, 'Markham Winery', '1324 Church St', 'Piner', 'KY', 41063, '', '', '', '')
+select * from [Vendor]
 go
 INSERT INTO [Product] (Name, VendorPartNumber, Price, Unit, PhotoPath, VendorId, Active)
     values ('Tanstafl', 001, 300, 1, '', 1, '')
+select * from [Product]
 go
-INSERT INTO [PurchaseRequest] (Description, Justification, DateNeeded, DeliveryMode, Status, Total)
-    values ('Wine','Just because I needed it','', 'USPS','', 1)
+INSERT INTO [PurchaseRequest] (Description, Justification, DateNeeded, DeliveryMode, Status, Total, UserId)
+    values ('Wine','Just because I needed it','', 'USPS','', 1, 1)
+select * from [PurchaseRequest]
 go
 INSERT INTO [PurchaseRequestLineItems] (PurchaseRequestId, ProductId, Quantity)
-    values ('', '', '')
+    values (1, 1, 1)
+select * from [PurchaseRequestLineItems]
