@@ -15,8 +15,8 @@ CREATE TABLE [User] (
     Password nvarchar(30) not null,
     FirstName nvarchar(30) not null,
     LastName nvarchar(30) not null,
-    Phone nvarchar(12),
-    Email nvarchar(80),
+    Phone nvarchar(12) not null,
+    Email nvarchar(80) not null,
     IsReviewer bit not null default 0,
     IsAdmin bit not null default 0,
     Active bit not null default 1
